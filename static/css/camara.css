@@ -524,3 +524,7 @@ ul {
     justify-content: flex-start;
     border-bottom-right-radius: 5px
 }
+
+.input-group{
+    width: 100%;
+}

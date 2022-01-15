@@ -6,7 +6,7 @@ import re
 from whoosh.fields import Schema, NUMERIC, TEXT, STORED, KEYWORD
 import os, shutil
 from whoosh.index import create_in, open_dir
-from whoosh.analysis import StandardAnalyzer
+from whoosh.analysis import StandardAnalyzer, KeywordAnalyzer
 
 URL_MIRRORLESS = "https://store.canon.es/camaras-compactas-de-sistema/p/"
 URL_DSLR = "https://store.canon.es/camaras-reflex/p/"
@@ -217,8 +217,8 @@ def extraer_detalles(pag_camara):
     return (sensor,iso,procesador)
 
 def populateWhoosh():
-    schemCamaras = Schema(id=NUMERIC(stored=True),nombre=TEXT(stored=True,analyzer=StandardAnalyzer(minsize=1)),sensor=TEXT(stored=True),iso=TEXT(stored=True),
-    procesador=TEXT(stored=True),precio=TEXT(stored=True),foto=STORED(),tipo=KEYWORD(stored=True,commas=True))
+    schemCamaras = Schema(id=NUMERIC(stored=True),nombre=TEXT(stored=True,analyzer=StandardAnalyzer(minsize=1)),sensor=TEXT(stored=True, analyzer=KeywordAnalyzer()),iso=TEXT(stored=True,analyzer=KeywordAnalyzer()),
+    procesador=TEXT(stored=True, analyzer=KeywordAnalyzer()),precio=TEXT(stored=True),foto=STORED(),tipo=KEYWORD(stored=True,commas=True))
 
     if os.path.exists("Index"):
         shutil.rmtree("Index")

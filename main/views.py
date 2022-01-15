@@ -45,7 +45,6 @@ def listar_paquetes(request):
 
 
 def buscar_camaras(request):
-    populate.populateWhoosh()
     form = Buscar_camara()
     lista_camaras = []
     consulta = ""
@@ -54,11 +53,15 @@ def buscar_camaras(request):
         form = Buscar_camara(request.POST)
         if form.is_valid():
             tipo = form.cleaned_data['tipo']
-            consulta = form.cleaned_data['consulta']
+            nombre = form.cleaned_data['nombre']
+            procesador = form.cleaned_data['procesador']
+            iso = form.cleaned_data['iso']
+            sensor = form.cleaned_data['sensor']
             directorio = 'Index'
             ix = open_dir('Index')
+            print(consulta)
             with ix.searcher() as searcher:
-                query = MultifieldParser(["nombre","tipo","procesador","sensor","iso"], ix.schema).parse(consulta + " " + tipo.get_tipo_display())
+                query = MultifieldParser(["nombre","tipo","procesador","sensor","iso"], ix.schema).parse(nombre + " " + procesador + " " + iso + " " + sensor + " " + tipo.get_tipo_display())
                 camaras = searcher.search(query)
                 for camara in camaras:
                     camara_obj = Camara.objects.get(pk=camara['id'])
