@@ -13,12 +13,24 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import handler404
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from main import views
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.inicio),
-    path('cargar/',views.cargar),
-]
+    path('accounts/',  include("django.contrib.auth.urls")),
+    path('',views.inicio, name='inicio'),
+    path('cargar/', views.cargar, name='cargarBD'),
+    path('camaras/',views.listar_camaras, name='camaras'),
+    path('camara/<int:id>',views.detalle_camara, name='camara'),
+    path('paquetes/',views.listar_paquetes, name='paquetes'),
+    path('buscarCamaras/',views.buscar_camaras),
+
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = "main.views.handler_404"

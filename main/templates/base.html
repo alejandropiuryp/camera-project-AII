@@ -1,16 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css'%}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'%}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/camara.css'%}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/menu.css'%}"/>
     <title>{% block titulo%}{% endblock %}</title>
 </head>
-<body>
-    <header> 
-        {% block encabezado %}{% endblock %}
-        <dd><a href='/'>Inicio</a></dd>
-        <dd><a href='/cargar'>Cargar Base de datos</a></dd>
-    <hr>
+<body class="bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <a class="navbar-brand" href="/">AutoShot</a>
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/cargar">Cargar Base de datos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/camaras">C&aacute;maras</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/paquetes">Paquetes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/buscarCamaras">Buscar c&aacute;maras</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+    {% block encabezado %}{% endblock %}
+    {% block contenido %} {% endblock %}
+  </div>
 </body>
 </html>
