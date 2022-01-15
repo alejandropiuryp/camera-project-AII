@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block titulo %}Confirmacion{% endblock %}
+{% block encabezado %}
+<h1 class="text-center text-white"> Confirmaci&oacute;n </h1>
+{% endblock %}
+
+  {% block contenido %}
+    <div class="container-sm">
+        <div class="alert alert-info"  role="alert">
+            <h3 class="text-center">AVISO: Este proceso es lento, borra la base de datos actual y requiere conexi&oacute;n a internet</h3>
+            <form id='formulario' method='post' action=''>{% csrf_token %}
+                <div class="col text-center">
+                    <input class="btn btn-primary mb-2" type="submit" name="Aceptar" value="Aceptar">
+                    <input class="btn btn-primary mb-2" type="submit" name="Cancelar" value="Cancelar">
+                </div>
+            </form>
+        </div>
+    </div>
+  {% endblock %}

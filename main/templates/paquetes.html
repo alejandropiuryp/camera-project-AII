@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block titulo %}Paquetes{% endblock %}
+{% block encabezado %}
+<h1 class="text-center text-white"> Paquetes </h1>
+{% endblock %}
+
+  {% block contenido %}
+    <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
+        <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+            {% for paquete in paquetes %}
+                <div class="col">
+                        <div class="card h-100 shadow-sm"> <img src={{paquete.camara.foto}} class="card-img-top" >
+                            <div class="card-body">
+                                <div class="clearfix mb-3"> <span class="float-end price-hp">{{paquete.precio}}</span> </div>
+                                <h5 class="card-title">
+                                    {{paquete.camara}}
+                                    {% for objetivo in paquete.objetivos.all%}
+                                        + Objetivo {{objetivo.montura}} {{objetivo.distancia_focal}} {{objetivo.apertura}}
+                                         {% if objetivo.estabilizador == "Si"%}
+                                            estabilizado
+                                         {% else %}
+                                            no estabilizado
+                                         {% endif%}
+                                         {{objetivo.motor_enfoque}}
+                                    {% endfor %}
+                                </h5>
+                            </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+  {% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Buscar{% endblock %}
+
+{% block encabezado %}
+<h1 class="text-center text-white"> Buscar </h1>
+{% endblock %}
+{% block contenido %}
+<form  id="formulario" method="post" action='' class="col-lg-6 offset-lg-3">{% csrf_token %}
+    <div class="input-group">
+        <div class="col text-center">
+                <div class="text-light">
+                    <div class="form-control">
+                        {{formulario.as_p}}
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </div>
+                </div>
+        </div>
+    </div>
+</form>
+
+{% if camaras %}
+    {% include "listaCamaras.html" %}
+{% endif %}
+{% endblock %}

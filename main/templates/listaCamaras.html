@@ -1,0 +1,15 @@
+<div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+        {% for camara in camaras %}
+            <div class="col">
+                    <div class="card h-100 shadow-sm"> <img src={{camara.foto}} class="card-img-top" >
+                        <div class="card-body">
+                            <div class="clearfix mb-3"> <span class="float-start badge rounded-pill bg-primary">{{camara.tipo.get_tipo_display}}</span> <span class="float-end price-hp">{{camara.precio}}</span> </div>
+                            <h5 class="card-title">{{camara.nombre}}</h5>
+                            <div class="text-center my-4"> <a href={% url 'camara' camara.id %} class="btn btn-warning">Detalles</a> </div>
+                        </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
