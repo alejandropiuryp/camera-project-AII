@@ -227,9 +227,7 @@ def populateWhoosh():
     ix = create_in("Index",schema=schemCamaras)
     writer = ix.writer()
     camaras = Camara.objects.all()
-    num_id_camara = 1
     for camara in camaras:
         writer.add_document(id=camara.id,nombre=camara.nombre,sensor=camara.sensor,
         iso=camara.iso,procesador=camara.procesador,precio=camara.precio[:-1],foto=camara.foto,tipo=camara.tipo.get_tipo_display())
-        num_id_camara += 1
     writer.commit()
