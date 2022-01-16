@@ -35,12 +35,10 @@ def listar_camaras(request):
 
 def detalle_camara(request, id):
     camara=get_object_or_404(Camara,pk=id)
-    print(camara.tipo.get_tipo_display())
     return render(request, 'camara.html', {'camara':camara})
 
 def listar_paquetes(request):
     paquetes=Paquete.objects.all()
-    print(paquetes[0].camara)
     return render(request, 'paquetes.html', {'paquetes':paquetes})
 
 
@@ -59,7 +57,6 @@ def buscar_camaras(request):
             sensor = form.cleaned_data['sensor']
             directorio = 'Index'
             ix = open_dir('Index')
-            print(consulta)
             with ix.searcher() as searcher:
                 query = MultifieldParser(["nombre","tipo","procesador","sensor","iso"], ix.schema).parse(nombre + " " + procesador + " " + iso + " " + sensor + " " + tipo.get_tipo_display())
                 camaras = searcher.search(query)
@@ -69,7 +66,4 @@ def buscar_camaras(request):
                         lista_camaras.append(camara_obj)
             return render(request,'buscador.html',{'formulario':form,'camaras':lista_camaras,'tipo':consulta})
     return render(request,'buscador.html',{'formulario':form,'camaras':lista_camaras,'tipo':consulta})
-
-def handler_404(request,exception):
-    return render(request,"404.html")
 
